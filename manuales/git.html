@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Equipo de Desarrollo</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="Description" content="Equipo de Desarrollo" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css" />
+</head>
+<body>
+    <header>
+        <div class="topbar-wrapper" style="z-index: 5;">
+            <div class="topbar" data-dropdown="dropdown" >
+                <div class="topbar-inner">
+                    <div class="container">
+                        <h3><a href="../">Centro de Investigacion Nucleo</a></h3>
+                        <ul class="nav">
+                            <li><a href="manuales/">Manuales</a></li>
+                            <li><a href="#">Equipo</a></li>
+                            <li><a href="#">Proyectos</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="hero-unit">
+            <h1>GIT</h1>
+            <p>En este manual revisaremos conceptos basicos, asi como recomendaciones a la hora de desarrollar proyectos informaticos.</p>
+        </div>
+        <h1>Conceptos previos</h1>
+        <p>Git es un sistema de versionamiento de codigo que permite trabajar de manera ordenada un proyecto informatico, manteniendo un historico 
+        y ramas (branches) para generar versiones del proyecto.</p>
+        <p>Para empezar a trabajar se recomienda usar un servidor GIT (no es necesario) ademas de saber las diferentes maneras de conectarnos.</p>
+        <h2>Servidor Git</h2>
+        <p>Para poder usar Git es recomendable usar un servidor central, que almacene el codigo. Existen servidores gratuitos pero <b>Github</b> es
+        el mas popular.</p>
+        <p>Para conectar con el servidor existen varios metodos, los mas usados son <b>HTTPS</b> y <b>ssh</b>. La mas rapida es la coneccion via SSH. 
+        Mas adelante detallaremos como trabajar con cada protocolo.</p>
+        <h2>Terminos usados</h2>
+        <p><b>Branch :</b> Rama de un proyecto informatico, se puede tener varias ramas para mantener todo ordenado (master, devel, release, etc.). Con GIT
+        es posible mantener ramas autonomas e intercambiar uno del otro sin problemas.</p>
+        <p><b>Tag: </b> Es una indicador en el proyecto, un hito importante que permite identificar un punto en la historia, por ejemplo el lanzamiento de la 
+        version 1.0.</p>
+        <p><b>Commit :</b> Conjunto de cambios con su descripcion que seran subidos al versionamiento de codigo, esta es la parte fundamental del versionamiento. 
+        GIT identificada cada commit con un alfanumero aleatorio.</p>
+        <br />
+        <h1>Primeros Pasos</h1>
+        <p>Para inicar con GIT debemos tener instalado, podemos ir a la <a href="http://git-scm.com/download" target="_blank">pagina oficial</a> para descargar de acuerdo a 
+        nuestro sistema operativo. Luego de ello podemos usar la linea de consola para trabajar o algun cliente en especifico, en este caso nos enfocaremos en la linea de comantos.</p>
+        <h2>Iniciar un proyecto</h2>
+        <p>Si ya tenemos un proyecto informatico y queremos empezar a versionar el codigo necesitamos inicializar el GIT en dicha carpeta, para ellos nos dirigimos al proyecto y en 
+        la consola ingresamos:</p>
+        <p><code>git init</code></p>
+        <p>Se crea una carpeta oculta .git indicando que el archivo esta versionado, ademas se crea por defecto el <i>branch</i> master donde subiremos todos los cambios.</p>
+        <p>Para realizar nuestro primer commit, realizamos un cambio en nuestro proyecto, luego para ver los cambios usaremos :</p>
+        <p><code>git status</code></p>
+        <p>Nos retorna la lista de archivos cambiados, luego de ello agregamos los archivos para ser commiteados :</p>
+        <p><code>git add --all</code></p>
+        <p>Y procedemos a realizar el commit :</p>
+        <p><code>git commit -m 'Primer commit en GIT'</code></p>
+        <h2>Trabajar con un Servidor</h2>
+        <p>Siempre es necesario realizar almacenar nuestros commits en un servidor GIT para luego tener una copia de respaldo y trabajar de manera mas segura. Existen varios servidores GIT,
+        explicaremos usando Github como servidor.</p>
+        <p>Si el proyecto esta en el servidor, es necesario realizar un clon del proyecto en nuestro entorno de desarollo local, para ello podemos usar diferentes protocolos (solo veremos el https y ssh).</p>
+        <p>Para usar https necesitaremos nuestra cuenta Github (usuario y password)</p>
+        <p><code>git clone https://usuario@github.com/usuario/proyecto.git</code></p>
+        <p>En el caso que usemos ssh (para esto necesitaremos asociar una llave a nuestra cuenta): </p>
+        <p><code>git clone git@github.com:usuario/proyecto.git</code></p>
+        <p>Luego de ello podemos realizar cambios y hacer los commits realizados (explicados anteriormente) pero aqui existen dos nuevos conceptos <b>pull</b> y <b>push</b> el cual sirve para "jalar" y "subir" 
+        los cambios respectivamentes al servidor GIT.</p>
+        <p>Si es que tenemos nuestro proyecto en nuestro entorno local, pero hay varias personas trabajando en el mismo es necesario tener una copia actualizada, para no generar conflictos a la hora de subir nuestros
+        cambios, asi que lo primero que se recomienda es jalar los cambios.</p>
+        <p><code>git pull origin master</code></p>
+        <p>Con este comando jalamos los cambios del <i>branch</i> master del servidor (origin), ahora una vez realizado los cambios y commiteados los mismos, procedemos a subirlos al servidor: </p>
+        <p><code>git push origin master</code></p>
+        <p>Asi podemos ir trabajando de manera colectiva, manteniendo un proyecto integrado y manejando los cambios.</p>
+        <br />
+        <h1>Comandos Adicionales</h1>
+        <p><b><code>git branch <i>rama</i></code></b> cambia de rama en el proyecto, de master a devel o release, todo el codigo cambio, pues cada rama es autonoma. Es importante realizar un commit con los cambios hechos
+        sino existiran problemas al realizar el cambio.</p>
+        <p><b><code>git log</code></b> nos permite ver el historico de commits realizados en el repositorio.</p>
+        <p><b><code>git blame <i>ruta/del/archivo</i></code></b> con esto podemos verificar quien hice que cambios en un archivo especifico.</p>
+        <br />
+        <h1>Recomendaciones</h1>
+        <p>Para colaborar con los proyectos del Equipo de Desarrollo del Nucleo, es necesario cumplir una seria de estandares que permita mantener el codigo ordenado.</p>
+        <p>Todo cambio rutinario se realiza en el branch <i>devel</i>, cuando se tenga un proyecto estabilizado el codigo sera transferido al branch <i>release</i> para realizar pruebas, luego de superadas las pruebas se usa <i>master</i> 
+        es decir el proyecto mas estable sera master.</p>
+        <p>Todo usuario tendra configurado su usuario de github para poder realizar cambios en el servidor, si no lo hace, sera rechazado. Para configurar el usuario de git realizamos en la consola:</p>
+        <p><code>git config --global user.name "Firstname Lastname"</code></p>
+        <p><code>git config --global user.email "your_email@youremail.com"</code></p>
+        <br />
+        <h1>Links de interes</h1>
+        <ul>
+            <li><a href="http://git-scm.com/" target="_blank">Pagina Oficial</a></li>
+            <li><a href="http://progit.org/book/es/" target="_blank">Manual Pro git</a></li>
+            <li><a href="http://help.github.com/" target="_blank">Ayuda oficial de GIthub</a></li>
+        </ul>
+    </div>
+</body>
+</html>
+	
