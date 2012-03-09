@@ -9,6 +9,34 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" language="javascript"> </script>
+    <script>
+	var equipo = ["MatsuoIV", "jfabianpe", "juazisco", "duotter"];
+	
+	for(var i=0; i<equipo.length; i++) {
+		getDataTwitter(equipo[i]);
+	}
+	
+	function getDataTwitter (username) {
+		$.ajax({
+			url: 'https://api.twitter.com/1/users/show.json?',
+			type: 'GET',
+			dataType: 'JSONP',
+			crossDomain: true,
+			data: {
+				'include_entities': 'true',
+				'screen_name': username
+			},
+			success: function(d) {
+				var container = $('#equipo');
+				img = d.profile_image_url_https.replace('https://si0.twimg.com/','https://twimg0-a.akamaihd.net/');
+				img = img.replace('normal','reasonably_small');
+				twitterAccount = 'http://twitter.com/'+d.screen_name;
+				container.append('<div class="media-grid row"><div class="span4"><a href="'+twitterAccount+'" target="_blank"><img src="'+img+'"></a></div><div class="span12"><h3>'+d.name+'</h3><p>'+d.description+'</p><a href="'+twitterAccount+'" target="_blank">@'+d.screen_name+'</a></div></div>');
+			}
+		});
+	}
+	</script>
 </head>
 <body>
     <header>
@@ -26,20 +54,9 @@
                 </div>
             </div>
         </div>
-    <div class="container">
+    <div class="container" id="equipo">
         <br><br><br><br>
-        <h1>Manuales</h1>
-        <div class="media-grid row">
-            <div class="span4">
-                <a href="#">
-                    <img src="http://placehold.it/128x128">
-                </a>
-            </div>
-            <div class="span12">
-                <h3>Asdf</h3>
-                <p>Descripcion</p>
-            </div>
-        </div>
+        <h1>Equipo</h1>
     </div>
 </body>
 </html>
